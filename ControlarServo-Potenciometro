@@ -1,0 +1,24 @@
+#include <Servo.h> 
+// importando a biblioteca de controle do Servo
+Servo myServo; // atribuindo nome ao Servo
+int angle;  // trabalhar com angulos inteiros ( obs: o Servomotor trabalha apenas em até 180 graus)
+int analogica; // Porta analógica que será usada pelo potenciometro.
+void setup()
+{
+  myServo.attach(6);// porta digital na qual está ligado o servoMotor
+  Serial.begin(9600); // ligar o monitor Serial 
+ 
+}
+
+void loop()
+{
+  analogica=analogRead(A0); // leitura da porta analógica
+  Serial.print("analógica: ");
+  Serial.println(analogica);
+  angle=map(analogica,0,1023,0,180); // atribuindo 0V como angulo minimo e 5v como angulo maximo 
+  Serial.print("Angulo: ");
+  Serial.println(angle);
+  myServo.write(angle);
+  delay(15);
+
+}
